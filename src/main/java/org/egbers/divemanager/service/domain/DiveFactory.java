@@ -9,6 +9,8 @@ import static org.egbers.divemanager.service.domain.Position.PIKE;
 import static org.egbers.divemanager.service.domain.Position.STRAIGHT;
 import static org.egbers.divemanager.service.domain.Position.TUCK;
 
+import org.egbers.divemanager.service.exception.InvalidApproachException;
+import org.egbers.divemanager.service.exception.InvalidPostionException;
 import org.egbers.divemanager.service.service.DegreeOfDifficultyCalculator;
 
 public class DiveFactory {
@@ -19,7 +21,7 @@ public class DiveFactory {
 		this.degreeOfDifficultyCalculator = degreeOfDifficultyCalculator;
 	}
 
-	public Dive createDive(final String fullDiveNumber, final Board board) {
+	public Dive createDive(final String fullDiveNumber, final Board board) throws InvalidPostionException, InvalidApproachException {
 		Dive dive = new Dive();
 		dive.setHeight(board);
 		dive.setNumber(fullDiveNumber.substring(0, fullDiveNumber.length() - 1));
@@ -50,7 +52,7 @@ public class DiveFactory {
 		return dive;
 	}
 
-	private Position getPosition(final String p) {
+	private Position getPosition(final String p) throws InvalidPostionException {
 		switch (p) {
 		case "A":
 			return STRAIGHT;
@@ -61,11 +63,11 @@ public class DiveFactory {
 		case "D":
 			return FREE;
 		default:
-			return null;
+			throw new InvalidPostionException();
 		}
 	}
 
-	private Approach getApproach(final int a) {
+	private Approach getApproach(final int a) throws InvalidApproachException {
 		switch (a) {
 		case 1:
 			return FORWARD;
@@ -76,7 +78,7 @@ public class DiveFactory {
 		case 4:
 			return INWARD;
 		default:
-			return null;
+			throw new InvalidApproachException();
 		}
 
 	}

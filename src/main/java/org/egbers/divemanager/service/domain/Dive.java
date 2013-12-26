@@ -38,15 +38,15 @@ public class Dive {
 	}
 
 	private String getTwistString() {
-		if (twists == null) {
+		if (twists == null || twists == 0F) {
 			return "";
 		}
 		if (.5F == twists) {
 			return "1/2tw ";
-		} else if (somersaults != Math.floor(twists)) {
+		} else if (twists != Math.floor(twists)) {
 			return (int) Math.floor(twists) + " 1/2tw ";
 		} else {
-			return somersaults + "tw ";
+			return twists.intValue() + "tw ";
 		}
 	}
 
@@ -59,7 +59,7 @@ public class Dive {
 		} else if (somersaults != Math.floor(somersaults)) {
 			return (int) Math.floor(somersaults) + " 1/2ss ";
 		} else {
-			return somersaults + "ss ";
+			return somersaults.intValue() + "ss ";
 		}
 	}
 

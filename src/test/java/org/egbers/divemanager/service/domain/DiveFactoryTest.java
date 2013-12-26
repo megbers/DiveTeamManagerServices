@@ -13,6 +13,9 @@ import static org.egbers.divemanager.service.domain.Position.TUCK;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+import org.egbers.divemanager.service.exception.DiveManagerException;
+import org.egbers.divemanager.service.exception.InvalidApproachException;
+import org.egbers.divemanager.service.exception.InvalidPostionException;
 import org.egbers.divemanager.service.service.DegreeOfDifficultyCalculator;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,14 +32,14 @@ public class DiveFactoryTest {
 	}
 
 	@Test
-	public void shouldSetTheDD() {
+	public void shouldSetTheDD() throws DiveManagerException {
 		when(mockCalculator.calculate(any(Dive.class))).thenReturn(1.4F);
 		Dive dive = factory.createDive("101A", ONE);
 		assertEquals(1.4F, dive.getDegreeOfDifficulty());
 	}
 
 	@Test
-	public void shouldCreateAValidNonTwistingFrontDive() {
+	public void shouldCreateAValidNonTwistingFrontDive() throws DiveManagerException {
 		Dive dive = factory.createDive("101A", ONE);
 
 		assertEquals(.5F, dive.getSomersaults());
@@ -46,7 +49,7 @@ public class DiveFactoryTest {
 	}
 
 	@Test
-	public void shouldCreateAValidNonTwistingBackDive() {
+	public void shouldCreateAValidNonTwistingBackDive() throws DiveManagerException {
 		Dive dive = factory.createDive("201B", ONE);
 
 		assertEquals(.5F, dive.getSomersaults());
@@ -56,7 +59,7 @@ public class DiveFactoryTest {
 	}
 
 	@Test
-	public void shouldCreateAValidNonTwistingReverseDive() {
+	public void shouldCreateAValidNonTwistingReverseDive() throws DiveManagerException {
 		Dive dive = factory.createDive("301C", ONE);
 
 		assertEquals(.5F, dive.getSomersaults());
@@ -66,7 +69,7 @@ public class DiveFactoryTest {
 	}
 
 	@Test
-	public void shouldCreateAValidNonTwistingInwardDive() {
+	public void shouldCreateAValidNonTwistingInwardDive() throws DiveManagerException {
 		Dive dive = factory.createDive("401D", ONE);
 
 		assertEquals(.5F, dive.getSomersaults());
@@ -76,7 +79,7 @@ public class DiveFactoryTest {
 	}
 
 	@Test
-	public void shouldCreateAValidTwistingDive() {
+	public void shouldCreateAValidTwistingDive() throws DiveManagerException {
 		Dive dive = factory.createDive("5111A", ONE);
 
 		assertEquals(.5F, dive.getSomersaults());
@@ -84,5 +87,15 @@ public class DiveFactoryTest {
 		assertEquals(FORWARD, dive.getApproach());
 		assertEquals(STRAIGHT, dive.getPosition());
 		assertEquals("5111", dive.getNumber());
+	}
+
+	@Test(expected = InvalidPostionException.class)
+	public void shouldThrowInvalidPostionException() throws DiveManagerException {
+		factory.createDive("101G", ONE);
+	}
+
+	@Test(expected = InvalidApproachException.class)
+	public void shouldThrowInvalidApproachException() throws DiveManagerException {
+		factory.createDive("701A", ONE);
 	}
 }

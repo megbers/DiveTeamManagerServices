@@ -33,6 +33,17 @@ public class DiveTest {
 	}
 
 	@Test
+	public void shouldReturnDescriptionWhenItIsADiveAndNoTwists() {
+		Dive dive = new Dive();
+		dive.setApproach(FORWARD);
+		dive.setSomersaults(.5F);
+		dive.setPosition(TUCK);
+		dive.setTwists(0F);
+
+		assertEquals("Forward Dive Tuck", dive.getDescription());
+	}
+
+	@Test
 	public void shouldReturnDescriptionWhenItIsATwister() {
 		Dive dive = new Dive();
 		dive.setApproach(FORWARD);
@@ -44,13 +55,24 @@ public class DiveTest {
 	}
 
 	@Test
+	public void shouldReturnDescriptionWhenItIsEvenNumberOfSomersaultsAndTwists() {
+		Dive dive = new Dive();
+		dive.setApproach(FORWARD);
+		dive.setSomersaults(2F);
+		dive.setTwists(1F);
+		dive.setPosition(TUCK);
+
+		assertEquals("Forward 2ss 1tw Tuck", dive.getDescription());
+	}
+
+	@Test
 	public void shouldReturnDescriptionWhenItIsATwisterWithMultipleTwistsAndSomersaults() {
 		Dive dive = new Dive();
 		dive.setApproach(REVERSE);
-		dive.setSomersaults(1.5F);
+		dive.setSomersaults(2.5F);
 		dive.setTwists(1.5F);
 		dive.setPosition(FREE);
 
-		assertEquals("Reverse 1 1/2ss 1 1/2tw Free", dive.getDescription());
+		assertEquals("Reverse 2 1/2ss 1 1/2tw Free", dive.getDescription());
 	}
 }
