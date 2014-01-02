@@ -4,12 +4,24 @@ divingTeamManager.controller('lookUpCntrl', ['$scope', 'DiveService', function($
 	//$scope.dive = DiveService.get({diveNumber: "", height: 1});
 	
 	$scope.updateDive = function() {
-		if($scope.diveNumber.match("[1-4][0-1][1-9][A-D]|[1-5][1-4][1-9][1-9][A-D]")) {
-			$scope.dive = DiveService.get({diveNumber: $scope.diveNumber, height: 1});
+		callServive($scope.diveNumber);
+	};
+	
+	$scope.updateDiveComposite = function() {
+		var diveNumber = $scope.twists > 0 ? 
+			"5" + $scope.approach + $scope.somersaults + $scope.twists + $scope.position
+			: $scope.approach + "0" + $scope.somersaults + $scope.position;
+		callServive(diveNumber);
+	};
+	
+	function callServive(diveNumber) {
+		if(diveNumber.match("[1-4][0-1][1-9][A-D]|[1-5][1-4][1-9][1-9][A-D]")) {
+			$scope.dive = DiveService.get({diveNumber: diveNumber, height: 1});
 		} else {
 			$scope.dive = {description: "Invalid Dive", number: "N/A", degreeOfDifficulty: "N/A"};
 		}
-	};
+	}
+	
 }]);
 
 

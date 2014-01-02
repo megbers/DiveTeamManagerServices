@@ -11,6 +11,43 @@
 <body ng-controller="lookUpCntrl">
 	<input type="text" ng-model="diveNumber" ng-change="updateDive()" />
 	
+	<br/>
+	<select ng-model="approach" ng-change="updateDiveComposite()">
+		<option value="1">Forward</option>
+		<option value="2">Backward</option>
+		<option value="3">Reverse</option>
+		<option value="4">Inward</option>
+	</select>
+	<select ng-model="somersaults" ng-change="updateDiveComposite()">
+		<option value="1">Dive</option>
+		<option value="2">1 ss</option>
+		<option value="3">1 1/2 ss</option>
+		<option value="4">2 ss</option>
+		<option value="5">2 1/2 ss</option>
+		<option value="6">3 ss</option>
+		<option value="7">3 1/2 ss</option>
+		<option value="8">4 ss</option>
+		<option value="9">4 1/2 ss</option>
+	</select>
+	<select ng-model="twists" ng-change="updateDiveComposite()">
+		<option value="0">0 tw</option>
+		<option value="1">1/2 tw</option>
+		<option value="2">1 tw</option>
+		<option value="3">1 1/2 tw</option>
+		<option value="4">2 tw</option>
+		<option value="5">2 1/2 tw</option>
+		<option value="6">3 tw</option>
+		<option value="7">3 1/2 tw</option>
+		<option value="8">4 tw</option>
+		<option value="9">4 1/2 tw</option>
+	</select>
+	<select ng-model="position" ng-change="updateDiveComposite()">
+		<option value="A">Straight</option>
+		<option value="B">Pike</option>
+		<option value="C">Tuck</option>
+		<option value="D">Free</option>
+	</select>
+	
 	<table class="diveLookUpTable">
 		<tr>
 			<th>Number</th>
