@@ -25,6 +25,7 @@ public class DiveFactory {
 		Dive dive = new Dive();
 		dive.setHeight(board);
 		dive.setNumber(fullDiveNumber.substring(0, fullDiveNumber.length() - 1));
+		// dive.setNumber(fullDiveNumber);
 
 		int approach;
 		float somersaults = 0, twists = 0;

@@ -1,5 +1,8 @@
 package org.egbers.divemanager.service.domain;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 public class Dive {
 	private String number;
 	private Approach approach;
@@ -93,6 +96,19 @@ public class Dive {
 
 	public void setTwists(final Float twists) {
 		this.twists = twists;
+	}
+
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		json.put("approach", approach.getText());
+		json.put("somersaults", somersaults);
+		json.put("twists", twists);
+		json.put("position", position.getCode());
+		json.put("degreeOfDifficulty", degreeOfDifficulty);
+		json.put("height", height.getCode());
+		json.put("number", number);
+		json.put("description", getDescription());
+		return json;
 	}
 
 }

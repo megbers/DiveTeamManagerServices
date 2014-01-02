@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="divingTeamManager">
+<head>
+  <meta charset="utf-8">
+  <title>Diving Team Manager - Look Up</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/angularjs/angular.min.js"></script>
+  <script src="js/angularjs/angular-resource.min.js"></script>
+  <script src="js/LookUp.js"></script>
+</head>
+<body ng-controller="lookUpCntrl">
+	<input type="text" ng-model="diveNumber" ng-change="updateDive()" />
+	
+	<table class="diveLookUpTable">
+		<tr>
+			<th>Number</th>
+			<th>Description</th>
+			<th>DD</th>
+		</tr>
+		<tr>
+			<td>{{dive.number}}{{dive.position}}</td>
+			<td>{{dive.description}}</td>
+			<td>{{dive.degreeOfDifficulty}}</td>
+		</tr>
+	</table>
+</body>
+</html>
